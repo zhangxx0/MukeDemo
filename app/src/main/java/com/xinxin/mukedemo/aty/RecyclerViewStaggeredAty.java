@@ -6,8 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.xinxin.mukedemo.R;
+import com.xinxin.mukedemo.adapter.SimpleRecAdapter;
 import com.xinxin.mukedemo.adapter.SimpleRecStaggeredAdapter;
 
 import java.util.ArrayList;
@@ -42,6 +44,19 @@ public class RecyclerViewStaggeredAty extends AppCompatActivity {
         // 设置item间的分割线
         // recyclerview.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL_LIST));
         // 使用默认的背景色；margin
+
+        simpleAdapter.setOnItemClickListener(new SimpleRecAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                // 长按时删除该项
+                simpleAdapter.deleteData(position);
+            }
+        });
 
     }
 

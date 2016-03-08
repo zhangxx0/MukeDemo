@@ -17,13 +17,26 @@ import java.util.List;
 public class SimpleRecAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     private Context context;
-    private List<String> datas;
+    protected List<String> datas;
     private LayoutInflater layoutInflater;
 
     public SimpleRecAdapter(Context context, List<String> datas) {
         this.context = context;
         this.datas = datas;
         layoutInflater = LayoutInflater.from(context);
+    }
+
+    // 添加OnClick监听
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+
+        void onItemLongClick(View view, int position);
+    }
+
+    private OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mOnItemClickListener = listener;
     }
 
     // 创建ViewHolder
@@ -37,8 +50,35 @@ public class SimpleRecAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     // 绑定ViewHolder
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.tv.setText(datas.get(position));
+
+        setUpItemEvent(holder);
+
+    }
+
+    // 抽出方法
+    protected void setUpItemEvent(final MyViewHolder holder) {
+        if (mOnItemClickListener != null) {
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int layoutPosition = holder.getLayoutPosition();
+                    mOnItemClickListener.onItemClick(holder.itemView, layoutPosition);
+                }
+            });
+
+            // LongClick
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    int layoutPosition = holder.getLayoutPosition();
+                    mOnItemClickListener.onItemLongClick(holder.itemView, layoutPosition);
+                    return false;
+                }
+            });
+        }
     }
 
     @Override
@@ -47,6 +87,16 @@ public class SimpleRecAdapter extends RecyclerView.Adapter<MyViewHolder> {
     }
 
 
+    public void addData(int pos) {
+        datas.add(pos, "insert one");
+//        notifyDataSetChanged();
+        notifyItemInserted(pos);
+    }
+
+    public void deleteData(int pos) {
+        datas.remove(pos);
+        notifyItemRemoved(pos);
+    }
 
 }
 
