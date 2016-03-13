@@ -9,11 +9,36 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="主页!" />
+        android:layout_gravity="center"
+        android:text="Android 5.x" />
 
     <Button
         android:id="@+id/btn_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="RecyclerView"/>
+        android:text="RecyclerView" />
+
+    <Button
+        android:id="@+id/btn_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Theme——ToolBar" />
+
+    <Button
+        android:id="@+id/btn_NavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NavigationView" />
+
+    <Button
+        android:id="@+id/btn_CoordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CoordinatorLayout" />
+
+    <Button
+        android:id="@+id/btn_CollapsingToolbarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CollapsingToolbarLayout" />
 </LinearLayout>

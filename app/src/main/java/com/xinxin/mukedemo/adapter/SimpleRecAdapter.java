@@ -58,6 +58,7 @@ public class SimpleRecAdapter extends RecyclerView.Adapter<MyViewHolder> {
     }
 
     // 抽出方法
+    //  这个方法也可以写在MyViewHolder中
     protected void setUpItemEvent(final MyViewHolder holder) {
         if (mOnItemClickListener != null) {
 
